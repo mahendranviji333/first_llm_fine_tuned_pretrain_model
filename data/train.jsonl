@@ -1,0 +1,99 @@
+{"instruction":"What is Django ORM?","response":"Django ORM allows developers to interact with database records using Python models and QuerySets."}
+{"instruction":"What is select_related?","response":"select_related uses SQL joins to retrieve related ForeignKey or OneToOne objects in the same query."}
+{"instruction":"What is prefetch_related?","response":"prefetch_related uses separate queries to retrieve related objects and combines the results in Python."}
+{"instruction":"What is a Django Model?","response":"A Django model is a Python class that defines the structure and fields of a database table."}
+{"instruction":"What is a QuerySet in Django?","response":"A QuerySet is a collection of database queries used to filter, order, and retrieve model instances."}
+{"instruction":"What does lazy evaluation mean in Django QuerySets?","response":"Lazy evaluation means a QuerySet does not hit the database until it is explicitly evaluated or iterated over."}
+{"instruction":"What is a Django Migration?","response":"A migration is a version-controlled Python file that propagates changes in your models to your database schema."}
+{"instruction":"How do you generate migration files in Django?","response":"Run the python manage.py makemigrations command to generate migration files based on model changes."}
+{"instruction":"How do you apply pending migrations in Django?","response":"Run the python manage.py migrate command to apply pending migrations to the database."}
+{"instruction":"What is a ForeignKey field in Django?","response":"A ForeignKey field defines a many-to-one relationship between two database models."}
+{"instruction":"What is a OneToOneField in Django?","response":"A OneToOneField defines a strict one-to-one relationship between two database models."}
+{"instruction":"What is a ManyToManyField in Django?","response":"A ManyToManyField defines a many-to-many relationship using an automatically generated join table."}
+{"instruction":"What is an abstract model in Django?","response":"An abstract model is a base model class whose fields are inherited by child models without creating a database table for itself."}
+{"instruction":"What is multi-table inheritance in Django?","response":"Multi-table inheritance creates a separate database table for each model in the inheritance hierarchy."}
+{"instruction":"What is proxy model inheritance in Django?","response":"Proxy model inheritance alters Python-level behavior of a model without creating a new database table."}
+{"instruction":"What does the filter method do in Django ORM?","response":"The filter method returns a new QuerySet containing objects that match the specified lookup parameters."}
+{"instruction":"What does the exclude method do in Django ORM?","response":"The exclude method returns a new QuerySet containing objects that do not match the specified parameters."}
+{"instruction":"What does the get method do in Django ORM?","response":"The get method retrieves a single model instance matching the lookup criteria or raises an exception."}
+{"instruction":"What exception is raised if get finds no matching object?","response":"Django raises a DoesNotExist exception when the get method finds no matching records."}
+{"instruction":"What exception is raised if get finds multiple objects?","response":"Django raises a MultipleObjectsReturned exception when the get method finds more than one record."}
+{"instruction":"How do you perform an OR query in Django ORM?","response":"Combine query filters using bitwise OR operators with Q objects, such as Q(a=1) | Q(b=2)."}
+{"instruction":"How do you perform an AND query using Q objects in Django?","response":"Combine Q objects using the bitwise AND operator, such as Q(a=1) & Q(b=2)."}
+{"instruction":"How do you negate a condition using Q objects in Django?","response":"Prepend a tilde operator ~ to a Q object, such as ~Q(status='inactive')."}
+{"instruction":"What is the Django F expression used for?","response":"An F expression references model field values directly in database operations without loading them into Python memory."}
+{"instruction":"How do you perform atomic field updates in Django?","response":"Use F expressions in update calls, such as Model.objects.filter(id=1).update(views=F('views') + 1)."}
+{"instruction":"What is race condition prevention using F expressions?","response":"F expressions perform database-level updates directly, avoiding race conditions caused by concurrent Python reads and writes."}
+{"instruction":"What is aggregation in Django ORM?","response":"Aggregation computes summary values over an entire QuerySet using functions like Avg, Count, Max, and Min."}
+{"instruction":"What is annotation in Django ORM?","response":"Annotation computes summary values for each individual item in a QuerySet and attaches the result as a virtual field."}
+{"instruction":"What is the difference between aggregate and annotate?","response":"Aggregate returns a single dictionary of values across all records, whereas annotate appends computed values to each row in a QuerySet."}
+{"instruction":"What is a Django Manager?","response":"A Manager is the interface through which database query operations are provided to Django models."}
+{"instruction":"How do you define a custom Manager in Django?","response":"Inherit from models.Manager and override methods like get_queryset or add custom queryset methods."}
+{"instruction":"What does the values method return in Django ORM?","response":"The values method returns a QuerySet that evaluates to dictionaries instead of model instances."}
+{"instruction":"What does the values_list method return in Django ORM?","response":"The values_list method returns a QuerySet that evaluates to tuples instead of model instances."}
+{"instruction":"How do you return a flat list using values_list?","response":"Pass flat=True to values_list when retrieving a single field value."}
+{"instruction":"What is the purpose of the only method in Django ORM?","response":"The only method defers loading all model fields except the specified ones until they are explicitly accessed."}
+{"instruction":"What is the purpose of the defer method in Django ORM?","response":"The defer method delays loading specific large fields from the database until they are accessed."}
+{"instruction":"What happens when you access a deferred field in Django?","response":"Django executes a separate database query to fetch the deferred field value on demand."}
+{"instruction":"What is the N+1 query problem in ORMs?","response":"The N+1 problem occurs when an application executes 1 initial query followed by N additional queries to fetch related items inside a loop."}
+{"instruction":"How do you solve the N+1 query problem for ForeignKeys?","response":"Use select_related to join related tables in a single SQL query."}
+{"instruction":"How do you solve the N+1 query problem for ManyToMany fields?","response":"Use prefetch_related to load related records using a separate query and join them in Python."}
+{"instruction":"What is the db_table attribute in Django Meta?","response":"db_table explicitly specifies the name of the database table to use for the model."}
+{"instruction":"What is ordering in Django Meta options?","response":"The ordering attribute sets the default sorting order for QuerySets of that model."}
+{"instruction":"How do you specify unique constraints across multiple fields in Django?","response":"Use UniqueConstraint inside the constraints list of the model's Meta class."}
+{"instruction":"How do you create a composite index in Django?","response":"Add an Index instance containing multiple field names to the indexes list in the model's Meta class."}
+{"instruction":"What is a database router in Django?","response":"A database router determines which database to use for read, write, migration, and relation operations in a multi-database setup."}
+{"instruction":"What is the default database alias in Django?","response":"The default database alias configured in Django settings is named 'default'."}
+{"instruction":"How do you route a query to a specific database in Django?","response":"Chain the using method onto the QuerySet, such as Model.objects.using('replica').all()."}
+{"instruction":"How do you run raw SQL queries in Django ORM?","response":"Use the RawSQL class or call Model.objects.raw('SELECT * FROM table')."}
+{"instruction":"What does connection.cursor() do in Django?","response":"It provides direct access to a database cursor for executing custom SQL commands."}
+{"instruction":"How do you perform bulk creation of database records in Django?","response":"Use Model.objects.bulk_create(list_of_instances) to insert multiple records in a single SQL query."}
+{"instruction":"What is a key limitation of bulk_create in Django?","response":"bulk_create does not automatically call the save method or trigger signal handlers for individual instances."}
+{"instruction":"How do you update multiple records efficiently in Django?","response":"Use Model.objects.filter(...).update(field=value) to execute a single UPDATE SQL statement."}
+{"instruction":"How do you perform bulk deletion in Django?","response":"Call delete() on a filtered QuerySet to remove all matching rows in a single operation."}
+{"instruction":"What is the get_or_create method in Django?","response":"get_or_create looks up an object with given parameters and creates a new one if none exists."}
+{"instruction":"What does get_or_create return?","response":"It returns a tuple containing the model instance and a boolean indicating whether a new object was created."}
+{"instruction":"What is the update_or_create method in Django?","response":"update_or_create updates an existing object matching lookup kwargs or creates a new one if absent."}
+{"instruction":"What is the purpose of on_delete=models.CASCADE?","response":"It automatically deletes child objects when the referenced parent object is deleted."}
+{"instruction":"What is on_delete=models.SET_NULL?","response":"It sets the ForeignKey field to NULL when the referenced parent object is deleted."}
+{"instruction":"What requirement must be met to use on_delete=models.SET_NULL?","response":"The ForeignKey field must have null=True enabled."}
+{"instruction":"What is on_delete=models.PROTECT?","response":"It prevents the deletion of a referenced parent object by raising a ProtectedError."}
+{"instruction":"What is on_delete=models.DO_NOTHING?","response":"It takes no action in Django, letting the underlying database enforce foreign key rules."}
+{"instruction":"What is the related_name parameter in Django relationships?","response":"related_name defines the reverse relation attribute name from the target model back to the source model."}
+{"instruction":"What happens if related_name is set to '+'?","response":"Django disables the reverse relationship mapping entirely."}
+{"instruction":"What is related_query_name in Django?","response":"related_query_name defines the target filter name used when querying reverse relationships."}
+{"instruction":"How do you filter by dates in Django ORM?","response":"Use field lookup suffixes such as __year, __month, __day, or __date."}
+{"instruction":"What is the exact lookup suffix in Django?","response":"The __exact suffix performs an exact match comparison in SQL queries."}
+{"instruction":"What is the iexact lookup suffix in Django?","response":"The __iexact suffix performs a case-insensitive exact match comparison."}
+{"instruction":"What is the contains lookup suffix in Django?","response":"The __contains suffix performs a case-sensitive substring containment test."}
+{"instruction":"What is the icontains lookup suffix in Django?","response":"The __icontains suffix performs a case-insensitive substring containment test."}
+{"instruction":"What is the in lookup suffix in Django?","response":"The __in suffix checks if a field value exists within a provided list, tuple, or QuerySet."}
+{"instruction":"What is the range lookup suffix in Django?","response":"The __range suffix generates an SQL BETWEEN statement for inclusive range filtering."}
+{"instruction":"What is the isnull lookup suffix in Django?","response":"The __isnull suffix checks whether a database field is NULL using IS NULL or IS NOT NULL."}
+{"instruction":"How do you execute atomic database transactions in Django?","response":"Wrap code blocks with the transaction.atomic() context manager or decorator."}
+{"instruction":"What happens if an exception occurs inside transaction.atomic()?","response":"Django rolls back all database modifications executed within that atomic block."}
+{"instruction":"How do you create savepoints within transactions in Django?","response":"Use transaction.savepoint() to create a savepoint and transaction.savepoint_rollback() to revert to it."}
+{"instruction":"What is transaction.on_commit in Django?","response":"transaction.on_commit registers callback functions to execute only after the active transaction successfully commits."}
+{"instruction":"What is transaction isolation level in databases?","response":"It defines the degree to which concurrently executing database transactions are isolated from each other."}
+{"instruction":"What is a Django signal related to models?","response":"Model signals trigger custom Python callbacks when model actions like save or delete occur."}
+{"instruction":"What is the pre_save signal in Django?","response":"pre_save is dispatched right before a model's save method executes."}
+{"instruction":"What is the post_save signal in Django?","response":"post_save is dispatched right after a model instance is saved to the database."}
+{"instruction":"What is the pre_delete signal in Django?","response":"pre_delete is dispatched right before a model instance is removed from the database."}
+{"instruction":"What is the post_delete signal in Django?","response":"post_delete is dispatched right after a model instance is deleted from the database."}
+{"instruction":"What is m2m_changed signal in Django?","response":"m2m_changed is dispatched when a ManyToManyField relation is altered on a model."}
+{"instruction":"What is the purpose of Django connection signals?","response":"Signals like request_started and request_finished monitor database connection lifecycle events."}
+{"instruction":"How do you disable signal handlers during testing?","response":"Disconnect the signal receiver explicitly or mock the signal using unittest.mock."}
+{"instruction":"What is database connection pooling in Django?","response":"Connection pooling maintains open database connections to reduce latency incurred by establishing new connections."}
+{"instruction":"How do you configure persistent database connections in Django?","response":"Set CONN_MAX_AGE in the DATABASES setting to the number of seconds connections should remain open."}
+{"instruction":"What is Django ModelForm?","response":"A ModelForm automatically creates form fields and validation logic mapped directly from a Django model."}
+{"instruction":"What does the save method of ModelForm do?","response":"It validates form inputs and saves the corresponding instance to the database."}
+{"instruction":"What does save(commit=False) do on a ModelForm?","response":"It creates an unsaved model instance from form data without writing it to the database immediately."}
+{"instruction":"What is Field.choices in Django models?","response":"Field.choices limits valid input values for a field to a predefined sequence of key-value pairs."}
+{"instruction":"What is IntegerChoices in Django?","response":"IntegerChoices is an enumeration class used to define choices with integer values."}
+{"instruction":"What is TextChoices in Django?","response":"TextChoices is an enumeration class used to define choices with string values."}
+{"instruction":"What is JSONField in Django ORM?","response":"JSONField stores structured JSON data and enables querying nested keys across database backends."}
+{"instruction":"How do you query nested keys in JSONField?","response":"Use double underscores to navigate key paths, such as metadata__author__name='Alice'."}
+{"instruction":"What is ArrayField in Django?","response":"ArrayField is a PostgreSQL-specific field type that stores lists of a single data type."}
+{"instruction":"What is HStoreField in Django?","response":"HStoreField is a PostgreSQL-specific field type that stores key-value text pairs."}
+{"instruction":"What is database field index in Django?","response":"Setting db_index=True creates a database index on that column to accelerate search operations."}
+{"instruction":"What is the default primary key field in Django models?","response":"Django defaults to an AutoField or BigAutoField unless an explicit primary key field is defined."}
